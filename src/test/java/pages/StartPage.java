@@ -9,10 +9,10 @@ import static com.codeborne.selenide.Selenide.*;
 public class StartPage {
 
     SelenideElement
-            workerSearchPage = $(By.xpath("//span[text()='Я ищу сотрудника']"));
+            productTvPage = $(By.xpath("//span[text()='Смотрите бесплатно в билайн ТВ']"));
 
-    public StartPage openWorkerSearchPage() {
-        workerSearchPage.click();
+    public StartPage openBeelineTVPage() {
+        productTvPage.click();
         return this;
     }
 

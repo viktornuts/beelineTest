@@ -3,9 +3,11 @@ package tests;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import pages.RegistrationPage;
+import pages.BeelineTvPage;
 import pages.StartPage;
-import pages.WorkerSearchPage;
+import pages.ProductTVPage;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -15,8 +17,8 @@ import static io.qameta.allure.Allure.step;
 public class BeelineTests extends TestBase {
 
     StartPage startPage = new StartPage();
-    WorkerSearchPage workerSearchPage = new WorkerSearchPage();
-    RegistrationPage registrationPage = new RegistrationPage();
+    ProductTVPage productTVPage = new ProductTVPage();
+    BeelineTvPage beelineTvPage = new BeelineTvPage();
 
     @Test
     @DisplayName("Проверка дашборда главной страницы")
@@ -32,17 +34,19 @@ public class BeelineTests extends TestBase {
 
     @Test
     @DisplayName("Проверка текста раздела 'Все способы оплаты' для 'Домашний телефон'")
-    void checkAllServicesPage() {
+    void checkAllPaymentOptions() {
         step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
             open("https://magnitogorsk.beeline.ru/customers/products/");
         });
 
         step("Переходим в раздел 'Все способы оплаты'", () -> {
-            $("[href='/customers/finansy-oplata/popolnenie-scheta/']").click();
+            $(By.xpath("//span[text()='все способы оплаты']")).click();
         });
 
         step("Выбираем вкладку 'Домашний телефон'", () -> {
-            $(By.xpath("//span[text()='Домашний телефон']")).click();
+            switchTo().window(1);
+            sleep(10000);
+            $(By.xpath("//a[text()='Домашний телефон']")).shouldBe(visible, Duration.ofSeconds(30)).click();
         });
 
         step("Проверяем отображение текста раздела 'Все оплаты' для 'Домашний телефон'", () -> {
@@ -52,49 +56,61 @@ public class BeelineTests extends TestBase {
     }
 
     @Test
-    @DisplayName("PageObj Проверка предупреждений при регистрации работодателя c пустыми данными")
-    void registrationAlertPageCheck() {
-        open("https://chelyabinsk.hh.ru/");
-        startPage.openWorkerSearchPage();
-        workerSearchPage.clickPostVacanciesButton();
-        registrationPage.clickRegistrationSubmitButton().checkEmailAlert().checkNameAlert().checkPhoneAlert().checkSurnameAlert().checkCompanyNameAlert();
+    @DisplayName("PageObj Проверка отображения страницы 'Стать абонентом билайн тв'")
+    void registrationPageCheck() {
+        open("https://magnitogorsk.beeline.ru/customers/products/");
+        startPage.openBeelineTVPage();
+        productTVPage.clickPostVacanciesButton();
+        beelineTvPage.checkPageInformation();
     }
 
     @Test
-    @DisplayName("Проверка раздела 'Карьерная консультация'")
-    void checkCareerConsultPage() {
-        step("Открываем раздел сайта hh.ru 'Карьерная консультация'", () -> {
-           open("https://chelyabinsk.hh.ru/career_consult?hhtmFromLabel=header&hhtmFrom=main");
+    @DisplayName("Проверка стоимости золотого номера")
+    void checkGoldenNumberPrice() {
+        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
+            open("https://magnitogorsk.beeline.ru/customers/products/");
         });
 
-        step("Проверка отображения текста раздела 'Карьерная консультация'", () -> {
-            $("p[class='hero_text']").shouldHave(text("Онлайн-консультация с карьерным экспертом  по вопросам, связанным с развитием карьеры и поиском работы"));
+        step("В блоке 'Красивые номера' выбираем 'Золотые'", () -> {
+            $(By.xpath("//span[text()='Золотые']")).click();
+        });
+
+        step("Проверяем стоимость золотого номера", () -> {
+            $("[class='MgQFWr tNxpRB nviGIG QkPQZ7']").shouldHave(text("15 000 ₽"));
         });
     }
 
     @Test
-    @DisplayName("Проверка стоимости тарифов готовых резюме ")
-    void checkExpertResumePage() {
-        step("Открываем сайт  hh.ru раздел 'Готовое резюме' ", () -> {
-            open("https://chelyabinsk.hh.ru/expert_resume?hhtmFromLabel=header&hhtmFrom=main#price");
+    @DisplayName("Проверка стоимости тарифов")
+    void checkTariffsPrices() {
+        step("Открываем сайт  Билайн раздел 'Тарифы' ", () -> {
+            open("https://magnitogorsk.beeline.ru/customers/products/mobile/tariffs/");
         });
 
-        step("Проверяем стоимость тарифа 'Базовый'", () -> {
-            $$("div[class='price__info']").get(0).shouldHave(text("Базовый"));
-            $$("div[class='price__info']").get(0).shouldHave(text("4 100 руб."));
+        step("Проверяем стоимость тарифа 'Базя'", () -> {
+            $$("div[class='jRBMEz']").get(0).shouldHave(text("Базя"));
+            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(0).shouldHave(text("610"));
         });
 
-        step("Проверяем стоимость тарифа 'Оптимальный'", () -> {
-            $$("div[class='price__info']").get(1).shouldHave(text("Оптимальный"));
-            $$("div[class='price__info']").get(1).shouldHave(text("4 900 руб."));
+        step("Проверяем стоимость тарифа 'Юнг'", () -> {
+            $$("div[class='jRBMEz']").get(1).shouldHave(text("Юнг"));
+            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(1).shouldHave(text("510"));
         });
 
-        step("Проверяем стоимость тарифа 'Максимальный'", () -> {
-            $$("div[class='price__info']").get(2).shouldHave(text("Максимальный"));
-            $$("div[class='price__info']").get(2).shouldHave(text("7 900 руб."));
+        step("Проверяем стоимость тарифа 'Пуш'", () -> {
+            $$("div[class='jRBMEz']").get(2).shouldHave(text("Пуш"));
+            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(2).shouldHave(text("690"));
         });
 
+        step("Проверяем стоимость тарифа 'Тапа'", () -> {
+            $$("div[class='jRBMEz']").get(3).shouldHave(text("Тапа"));
+            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(3).shouldHave(text("360"));
+        });
 
+        step("Проверяем стоимость тарифа 'Пинг'", () -> {
+            $$("div[class='jRBMEz']").get(4).shouldHave(text("Пинг"));
+            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(4).shouldHave(text("440"));
+        });
     }
 
 }
