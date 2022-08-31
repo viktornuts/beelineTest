@@ -23,8 +23,8 @@ public class BeelineTests extends TestBase {
     @Test
     @DisplayName("Проверка дашборда главной страницы")
     void checkDashboardTest() {
-        step("Открываем сайт https://beeline.ru/customers/products/", () -> {
-            open("https://beeline.ru/customers/products/");
+        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
+            open("https://magnitogorsk.beeline.ru/customers/products/");
         });
 
         step("check dashboard", () -> {
@@ -35,8 +35,8 @@ public class BeelineTests extends TestBase {
     @Test
     @DisplayName("Проверка текста раздела 'Все способы оплаты' для 'Домашний телефон'")
     void checkAllPaymentOptions() {
-        step("Открываем сайт https://beeline.ru/customers/products/", () -> {
-            open("https://github.com/viktornuts/beelineTest");
+        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
+            open("https://magnitogorsk.beeline.ru/customers/products/");
         });
 
         step("Переходим в раздел 'Все способы оплаты'", () -> {
@@ -58,7 +58,7 @@ public class BeelineTests extends TestBase {
     @Test
     @DisplayName("PageObj Проверка отображения страницы 'Стать абонентом билайн тв'")
     void registrationPageCheck() {
-        open("https://github.com/viktornuts/beelineTest");
+        open("https://magnitogorsk.beeline.ru/customers/products/");
         startPage.openBeelineTVPage();
         productTVPage.clickPostVacanciesButton();
         beelineTvPage.checkPageInformation();
@@ -67,8 +67,8 @@ public class BeelineTests extends TestBase {
     @Test
     @DisplayName("Проверка стоимости золотого номера")
     void checkGoldenNumberPrice() {
-        step("Открываем сайт https://beeline.ru/customers/products/", () -> {
-            open("https://github.com/viktornuts/beelineTest");
+        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
+            open("https://magnitogorsk.beeline.ru/customers/products/");
         });
 
         step("В блоке 'Красивые номера' выбираем 'Золотые'", () -> {
@@ -84,7 +84,7 @@ public class BeelineTests extends TestBase {
     @DisplayName("Проверка стоимости тарифов")
     void checkTariffsPrices() {
         step("Открываем сайт  Билайн раздел 'Тарифы' ", () -> {
-            open("https://github.com/viktornuts/beelineTest");
+            open("https://magnitogorsk.beeline.ru/customers/products/mobile/tariffs/");
         });
 
         step("Проверяем стоимость тарифа 'Базя'", () -> {
