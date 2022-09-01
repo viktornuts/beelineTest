@@ -5,14 +5,12 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class EthTvPage {
-    SelenideElement
-
-            forHome500Tariff = $("[href='/tarif-dlya-doma-500-s-tv_ot_bilayn_moskva']");
 
     public EthTvPage goToForHome500Tariff() {
-        forHome500Tariff.click();
+        open("https://beelineru.ru/tarif-dlya-doma-500-s-tv_ot_bilayn_moskva");
         return this;
     }
 
