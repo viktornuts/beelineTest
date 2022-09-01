@@ -23,35 +23,31 @@ public class BeelineTests extends TestBase {
     @Test
     @DisplayName("Проверка дашборда главной страницы")
     void checkDashboardTest() {
-        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
-            open("https://magnitogorsk.beeline.ru/customers/products/");
+        step("Открываем сайт https://beelineru.ru/", () -> {
+            open("https://beelineru.ru/");
         });
 
         step("check dashboard", () -> {
-            $(By.xpath("//span[text()='Прокачать']")).shouldBe(visible);
+            $("[id='b32898']").shouldBe(visible).shouldHave(text("Одна цена всё лето!"));
         });
     }
 
     @Test
-    @DisplayName("Проверка текста раздела 'Все способы оплаты' для 'Домашний телефон'")
-    void checkAllPaymentOptions() {
-        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
-            open("https://magnitogorsk.beeline.ru/customers/products/");
+    @DisplayName("Проверка текста раздела 'Акции'")
+    void checkAllPromotionsOptions() {
+        step("Открываем сайт https://beelineru.ru/", () -> {
+            open("https://beelineru.ru/");
         });
 
-        step("Переходим в раздел 'Все способы оплаты'", () -> {
-            $(By.xpath("//span[text()='все способы оплаты']")).click();
+        step("Переходим в раздел 'Акции'", () -> {
+            $(By.xpath("//a[text()='Акции']")).click();
         });
 
-        step("Выбираем вкладку 'Домашний телефон'", () -> {
-            switchTo().window(1);
-            sleep(10000);
-            $(By.xpath("//a[text()='Домашний телефон']")).shouldBe(visible, Duration.ofSeconds(30)).click();
-        });
-
-        step("Проверяем отображение текста раздела 'Все оплаты' для 'Домашний телефон'", () -> {
-            $("[class='help-text help-content border_bottom_pay complex-payment-single-windget fast-pay complex-payment_bg']").shouldHave(text("Пополнение счёта с банковской карты"));
-            $("[class='help-text complex-payment-single-windget border_bottom_pay fast-pay fast-pay complex-payment_bg']").shouldHave(text("Наличными"));
+        step("Проверяем отображение текста раздела 'Акции'", () -> {
+            $("[id='b32898']").shouldBe(visible).shouldHave(text("«50 Гб в подарок»"));
+            $("[id='b33457']").shouldBe(visible).shouldHave(text("Скидка 50%"));
+            $("[id='b31200']").shouldBe(visible).shouldHave(text("«Для тебя и дома»"));
+            $("[id='b20928']").shouldBe(visible).shouldHave(text("«Близкие люди»"));
         });
     }
 
@@ -65,51 +61,53 @@ public class BeelineTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Проверка стоимости золотого номера")
+    @DisplayName("Отрпаввление данных на проверку подключения дома к билайн")
     void checkGoldenNumberPrice() {
-        step("Открываем сайт https://magnitogorsk.beeline.ru/customers/products/", () -> {
-            open("https://magnitogorsk.beeline.ru/customers/products/");
+        step("Открываем сайт https://beelineru.ru/", () -> {
+            open("https://beelineru.ru/");
         });
 
-        step("В блоке 'Красивые номера' выбираем 'Золотые'", () -> {
-            $(By.xpath("//span[text()='Золотые']")).click();
+        step("Вносим данные по наименованию города", () -> {
+            $("#b33035.bi.formCity").setValue("Магнитогорск");
         });
 
-        step("Проверяем стоимость золотого номера", () -> {
-            $("[class='MgQFWr tNxpRB nviGIG QkPQZ7']").shouldHave(text("15 000 ₽"));
+        step("Вносим данные по наименованию улицы", () -> {
+            $("#b33036.bi.formStreet").setValue("Гагарина");
+        });
+
+        step("Вносим данные по номеру дома", () -> {
+            $("#b33037.bi.formHouse").setValue("21");
+        });
+
+        step("Вносим данные по номеру телефона", () -> {
+            $("#b33037.bi.formHouse").setValue("9090995477");
+        });
+
+        step("Проверяем ответ от билайна", () -> {
+            $("#b1433.bi.ansTel").shouldBe(visible).shouldHave(text("Ваш запрос на проверку технической возможности успешно отправлен!"));
         });
     }
 
     @Test
-    @DisplayName("Проверка стоимости тарифов")
+    @DisplayName("Проверка стоимости 'Лучшие тарифы билайн 2022'")
     void checkTariffsPrices() {
-        step("Открываем сайт  Билайн раздел 'Тарифы' ", () -> {
-            open("https://magnitogorsk.beeline.ru/customers/products/mobile/tariffs/");
+        step("Открываем сайт https://beelineru.ru/", () -> {
+            open("https://beelineru.ru/");
         });
 
-        step("Проверяем стоимость тарифа 'Базя'", () -> {
-            $$("div[class='jRBMEz']").get(0).shouldHave(text("Базя"));
-            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(0).shouldHave(text("610"));
+        step("Проверяем стоимость тарифа 'Для тебя и дома 2'", () -> {
+            $$(".tarifscard-v").get(0).shouldHave(text("Для тебя и дома 2"));
+            $$(".tarif-ap-v").get(0).shouldHave(text("650"));
         });
 
-        step("Проверяем стоимость тарифа 'Юнг'", () -> {
-            $$("div[class='jRBMEz']").get(1).shouldHave(text("Юнг"));
-            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(1).shouldHave(text("510"));
+        step("Проверяем стоимость тарифа 'Для тебя и дома 1'", () -> {
+            $$(".tarifscard-v").get(1).shouldHave(text("Для тебя и дома 1"));
+            $$(".tarif-ap-v").get(1).shouldHave(text("900"));
         });
 
-        step("Проверяем стоимость тарифа 'Пуш'", () -> {
-            $$("div[class='jRBMEz']").get(2).shouldHave(text("Пуш"));
-            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(2).shouldHave(text("690"));
-        });
-
-        step("Проверяем стоимость тарифа 'Тапа'", () -> {
-            $$("div[class='jRBMEz']").get(3).shouldHave(text("Тапа"));
-            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(3).shouldHave(text("360"));
-        });
-
-        step("Проверяем стоимость тарифа 'Пинг'", () -> {
-            $$("div[class='jRBMEz']").get(4).shouldHave(text("Пинг"));
-            $$("span[class='p8xSsR PnnGR4 WnyeUH']").get(4).shouldHave(text("440"));
+        step("Проверяем стоимость тарифа 'На максимум+!'", () -> {
+            $$(".tarifscard-v").get(2).shouldHave(text("На максимум+!"));
+            $$(".tarif-ap-v").get(2).shouldHave(text("2000"));
         });
     }
 

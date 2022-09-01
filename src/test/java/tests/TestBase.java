@@ -18,7 +18,7 @@ public class TestBase extends AllureAttachments {
         Configuration.browserCapabilities = capabilities;
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-        Configuration.baseUrl = "https://magnitogorsk.beeline.ru/customers/products/";
+        Configuration.baseUrl = "https://beelineru.ru/";
         Configuration.browserSize = "1800x900";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
