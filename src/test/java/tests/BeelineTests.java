@@ -3,11 +3,9 @@ package tests;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import pages.BeelineTvPage;
+import pages.EthTvPage;
+import pages.ForHome500TariffPage;
 import pages.StartPage;
-import pages.ProductTVPage;
-
-import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -17,8 +15,8 @@ import static io.qameta.allure.Allure.step;
 public class BeelineTests extends TestBase {
 
     StartPage startPage = new StartPage();
-    ProductTVPage productTVPage = new ProductTVPage();
-    BeelineTvPage beelineTvPage = new BeelineTvPage();
+    ForHome500TariffPage forHome500TariffPage = new ForHome500TariffPage();
+    EthTvPage ethTvPage = new EthTvPage();
 
     @Test
     @DisplayName("Проверка дашборда главной страницы")
@@ -52,40 +50,27 @@ public class BeelineTests extends TestBase {
     }
 
     @Test
-    @DisplayName("PageObj Проверка отображения страницы 'Стать абонентом билайн тв'")
-    void registrationPageCheck() {
-        open("https://magnitogorsk.beeline.ru/customers/products/");
-        startPage.openBeelineTVPage();
-        productTVPage.clickPostVacanciesButton();
-        beelineTvPage.checkPageInformation();
+    @DisplayName("PageObj Проверка отображения страницы тарифа 'Для дома 500 с ТВ'")
+    void tariffCheckTest() {
+        open("https://beelineru.ru/");
+        startPage.openEthTvPage();
+        ethTvPage.goToForHome500Tariff();
+        forHome500TariffPage.checkTariffInformation();
+
     }
 
     @Test
-    @DisplayName("Отрпаввление данных на проверку подключения дома к билайн")
-    void checkGoldenNumberPrice() {
-        step("Открываем сайт https://beelineru.ru/", () -> {
-            open("https://beelineru.ru/");
+    @DisplayName("Проверка раздела 'О компании'")
+    void checkAboutCompanyPage() {
+
+        step("Переходим в раздел 'О компании'", () -> {
+            open("https://beelineru.ru/legal/about");
         });
 
-        step("Вносим данные по наименованию города", () -> {
-            $("#b33035.bi.formCity").setValue("Магнитогорск");
+        step("Проверяем информацию в разделе 'О компании'", () -> {
+            $("#b1863.bi").shouldHave(text("Более 13 лет билайн приносит в дома цифровое телевидение и интернет"));
         });
 
-        step("Вносим данные по наименованию улицы", () -> {
-            $("#b33036.bi.formStreet").setValue("Гагарина");
-        });
-
-        step("Вносим данные по номеру дома", () -> {
-            $("#b33037.bi.formHouse").setValue("21");
-        });
-
-        step("Вносим данные по номеру телефона", () -> {
-            $("#b33037.bi.formHouse").setValue("9090995477");
-        });
-
-        step("Проверяем ответ от билайна", () -> {
-            $("#b1433.bi.ansTel").shouldBe(visible).shouldHave(text("Ваш запрос на проверку технической возможности успешно отправлен!"));
-        });
     }
 
     @Test

@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -9,10 +8,10 @@ import static com.codeborne.selenide.Selenide.*;
 public class StartPage {
 
     SelenideElement
-            productTvPage = $(By.xpath("//span[text()='Смотрите бесплатно в билайн ТВ']"));
+            etherTvPage = $("#b417.bi");
 
-    public StartPage openBeelineTVPage() {
-        productTvPage.click();
+    public StartPage openEthTvPage() {
+        etherTvPage.click();
         return this;
     }
 
