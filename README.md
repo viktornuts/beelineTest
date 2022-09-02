@@ -51,10 +51,10 @@
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UI
 
 > - [x] *Проверка дашборда главной страницы*
->- [x] *Проверка текста раздела 'Все способы оплаты' для 'Домашний телефон'*
->- [x] *Проверка отображения страницы 'Стать абонентом билайн тв' (PajeObj)*
->- [x] *Проверка стоимости золотого номера*
->- [x] *Проверка стоимости тарифов*
+>- [x] *Проверка текста раздела 'Акции'*
+>- [x] *Проверка отображения страницы тарифа 'Для дома 500 с ТВ' (PajeObj)*
+>- [x] *Проверка раздела 'О компании'*
+>- [x] *Проверка стоимости 'Лучшие тарифы билайн 2022'*
 
 ## :computer: Запуск тестов из терминала 
 
@@ -83,7 +83,7 @@ gradle clean test
 >
 > <code>BROWSER_SIZE</code> – размер окна браузера, в котором будут выполняться тесты (_по умолчанию - <code>1920x1080</code>_).
 
-## <img width="4%" title="Jenkins" src="images/logo/Jenkins.svg"> Запуск тестов в [Jenkins](https://jenkins.autotests.cloud/job/HhRuJenkinsJob/)
+## <img width="4%" title="Jenkins" src="images/logo/Jenkins.svg"> Запуск тестов в [Jenkins](https://jenkins.autotests.cloud/job/BeelineJenkisJob/)
 
 *Для запуска сборки необходимо указать значения параметров и нажать кнопку <code><strong>*Собрать*</strong></code>.*
 
@@ -95,7 +95,7 @@ gradle clean test
 значок <img width="2%" title="Allure Report" src="images/logo/Allure.svg"><code><strong>*Allure
 Report*</strong></code>, кликнув по которому, откроется страница с сформированным html-отчетом.*
 
-## <img width="4%" title="Allure Report" src="images/logo/Allure.svg"> Отчет о результатах тестирования в [Allure Report](https://jenkins.autotests.cloud/job/HhRuJenkinsJob/allure/)
+## <img width="4%" title="Allure Report" src="images/logo/Allure.svg"> Отчет о результатах тестирования в [Allure Report](https://jenkins.autotests.cloud/job/BeelineJenkisJob/allure/)
 
 ### :pushpin: Общая информация
 
@@ -110,7 +110,7 @@ Report*</strong></code>, кликнув по которому, откроетс�
 >- [x] <code><strong>*EXECUTORS*</strong></code> - отображает исполнителя текущей сборки (ссылка на сборку в Jenkins)
 
 <p align="center">
-  <img src="images/screens/Alure_Report3.png" alt="Allure Report" width="900">
+  <img src="images/screens/Allure_Report3.png" alt="Allure Report" width="900">
 </p>
 
 ## <img width="4%" title="Telegram" src="images/logo/Telegram.svg"> Уведомления в Telegram с использованием бота
