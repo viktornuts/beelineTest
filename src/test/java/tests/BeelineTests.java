@@ -26,7 +26,7 @@ public class BeelineTests extends TestBase {
         });
 
         step("check dashboard", () -> {
-            $("[id='b33042']").shouldBe(visible).shouldHave(text("Одна цена всё лето!"));
+            $("[id='b33042']").shouldBe(visible).shouldHave(text("Одна цена всю осень!"));
         });
     }
 
