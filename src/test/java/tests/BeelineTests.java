@@ -42,10 +42,8 @@ public class BeelineTests extends TestBase {
         });
 
         step("Проверяем отображение текста раздела 'Акции'", () -> {
-            $("[id='b32898']").shouldBe(visible).shouldHave(text("«50 Гб в подарок»"));
-            $("[id='b33457']").shouldBe(visible).shouldHave(text("Скидка 50%"));
-            $("[id='b31200']").shouldBe(visible).shouldHave(text("«Для тебя и дома»"));
-            $("[id='b20928']").shouldBe(visible).shouldHave(text("«Близкие люди»"));
+            $("[id='b33458']").shouldBe(visible).shouldHave(text("Скидка 50% на 3 месяца новом тарифе «Для тебя и дома 2»"));
+            $("[id='b31201']").shouldBe(visible).shouldHave(text("Семейные тарифы. Домашний интернет, ТВ, мобильная связь. Вместе дешевле!"));
         });
     }
 
